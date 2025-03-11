@@ -1,0 +1,631 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.75rem;
+
+  /* Standardized custom colors */
+  --coral: 0 84% 60%; /* #E53E3E - red-600 */
+  --coral-hover: 0 84% 56%; /* #C53030 - slightly darker for hover states */
+  --lime-green: 120 61% 50%; /* #32CD32 */
+  --lime-green-hover: 120 61% 45%; /* Slightly darker for hover states */
+  --lime-light: 120 61% 90%; /* #d4f7d4 - light lime for backgrounds */
+  --lime-dark: 120 40% 18%; /* #1E3C1E - dark lime for dark mode */
+
+  /* Standardized grays */
+  --gray-50: 0 0% 98%;
+  --gray-100: 0 0% 96%;
+  --gray-200: 0 0% 90%;
+  --gray-300: 0 0% 83%;
+  --gray-400: 0 0% 64%;
+  --gray-500: 0 0% 45%;
+  --gray-600: 0 0% 32%;
+  --gray-700: 0 0% 23%;
+  --gray-800: 0 0% 15%;
+  --gray-900: 0 0% 9%;
+  --gray-950: 0 0% 4%;
+
+  /* Custom shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lime: 0 4px 8px rgba(50, 205, 50, 0.4);
+  --shadow-coral: 0 4px 10px rgba(229, 62, 62, 0.5);
+
+  /* Nav icon glow */
+  --nav-icon-glow: 0 0 8px rgba(255, 255, 255, 0.6);
+  --nav-icon-glow-active: 0 0 12px rgba(229, 62, 62, 0.8);
+  --nav-icon-glow-hover: 0 0 12px rgba(50, 205, 50, 0.8);
+
+  /* Loading animation colors for light mode */
+  --loading-glow-color: rgba(255, 0, 0, 0.3);
+  --loading-text-color: rgba(255, 0, 0, 0.8);
+}
+
+.dark {
+  --background: 0 0% 4%; /* Even darker background */
+  --foreground: 0 0% 98%;
+  --card: 0 0% 8%; /* Darker card background */
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 8%; /* Match card background */
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 12%; /* Darker secondary */
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 12%; /* Match secondary */
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 12%; /* Match secondary */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 15%; /* Darker border */
+  --input: 0 0% 15%; /* Match border */
+  --ring: 0 0% 83.1%;
+
+  /* Custom shadows for dark mode */
+  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
+  --shadow-lime: 0 4px 8px rgba(50, 205, 50, 0.2);
+  --shadow-coral: 0 4px 10px rgba(255, 127, 80, 0.3);
+
+  /* Invert the nav icon glow for dark mode */
+  --nav-icon-glow: 0 0 8px rgba(0, 0, 0, 0.6);
+  --nav-icon-glow-active: 0 0 12px rgba(255, 127, 80, 0.8);
+  --nav-icon-glow-hover: 0 0 12px rgba(50, 205, 50, 0.8);
+
+  /* Loading animation colors for dark mode */
+  --loading-glow-color: rgba(255, 0, 0, 0.3);
+  --loading-text-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Add a global transition for all color properties */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced button styles */
+.btn-shadow {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-shadow:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+/* Film modal and stats card shadows */
+.card-shadow {
+  box-shadow: var(--shadow-md);
+}
+
+/* Lime green shadow for film cards */
+.lime-shadow {
+  box-shadow: var(--shadow-lime);
+}
+
+/* Navigation icon glow effects */
+.nav-icon {
+  transition: filter 0.3s ease, transform 0.2s ease;
+}
+
+.nav-icon-default {
+  filter: drop-shadow(var(--nav-icon-glow));
+}
+
+.nav-icon-active {
+  filter: drop-shadow(var(--nav-icon-glow-active));
+}
+
+.nav-icon:hover {
+  filter: drop-shadow(var(--nav-icon-glow-hover));
+  transform: scale(1.1);
+}
+
+/* Fade in animation for search results */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+}
+
+/* Add this animation for the falling confetti */
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Add these animations for the expand/collapse effect */
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 0.5;
+  }
+  to {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Hide scrollbars but keep functionality */
+.overflow-x-auto {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Enhanced pulsating animation with more size change and less glow */
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+}
+
+.loading-pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* Add smooth scrolling class */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+/* Add these animation keyframes to the globals.css file */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+//
+Add the closing animation for the modal
+@keyframes modalClosing {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+100% {
+opacity: 
+0
+;
+transform:scale 
+(
+0.95
+)
+;
+  }
+}
+
+.modal-closing {
+  animation: modalClosing 0.2s ease-out forwards;
+}
+
+.modal-content {
+  animation: modalOpen 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Add these utility classes for the modal animations */
+.modal-backdrop {
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.modal-content {
+  animation: modalScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-item-1 {
+  animation: modalSlideUp 0.3s ease-out forwards;
+}
+
+.modal-item-2 {
+  animation: modalSlideUp 0.3s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.modal-item-3 {
+  animation: modalSlideUp 0.3s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.modal-item-4 {
+  animation: modalSlideUp 0.3s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Add animation for loading screen text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Add this keyframe animation for the shake effect */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Global styles for tabs using regular CSS instead of @apply */
+@layer components {
+  .tabs-container {
+    background-color: black;
+    border: 1px solid #374151;
+    border-radius: 10px;
+    padding: 0.25rem;
+  }
+
+  .tab-item {
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .tab-item:hover {
+    background-color: #1f2937;
+  }
+
+  .tab-item[data-state="active"] {
+    background-color: #1f2937;
+    font-weight: 500;
+  }
+
+  .tab-item[data-state="inactive"] {
+    color: #9ca3af;
+  }
+
+  .tab-content {
+    margin-top: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .dark [role="tablist"] {
+    @apply bg-black border-gray-700;
+  }
+
+  .dark [role="tab"][data-state="active"] {
+    @apply bg-gray-800;
+  }
+
+  .dark [role="tab"][data-state="inactive"] {
+    @apply text-gray-400;
+  }
+
+  .dark [role="tab"]:hover {
+    @apply bg-gray-800;
+  }
+}
+
+/* Apply the custom classes to the tab elements */
+[role="tablist"] {
+  @apply tabs-container;
+}
+
+[role="tab"] {
+  @apply tab-item;
+}
+
+[role="tabpanel"] {
+  @apply tab-content;
+}
+
+/* Add these smooth scrolling animations to the globals.css file */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* Add staggered animation delays */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Add smooth hover transitions for cards */
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Add smooth image zoom effect */
+.image-zoom-container {
+  overflow: hidden;
+}
+
+.image-zoom {
+  transition: transform 0.5s ease;
+}
+
+.image-zoom:hover {
+  transform: scale(1.1);
+}
+
+/* Add smooth background transitions */
+.bg-transition {
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Add these utility classes for our standardized colors */
+@layer utilities {
+  .bg-coral {
+    background-color: hsl(var(--coral));
+  }
+  .bg-coral-hover {
+    background-color: hsl(var(--coral-hover));
+  }
+  .bg-lime-green {
+    background-color: hsl(var(--lime-green));
+  }
+  .bg-lime-green-hover {
+    background-color: hsl(var(--lime-green-hover));
+  }
+  .bg-lime-light {
+    background-color: hsl(var(--lime-light));
+  }
+  .bg-lime-dark {
+    background-color: hsl(var(--lime-dark));
+  }
+  .text-coral {
+    color: hsl(var(--coral));
+  }
+  .text-lime-green {
+    color: hsl(var(--lime-green));
+  }
+  .border-coral {
+    border-color: hsl(var(--coral));
+  }
+  .border-lime-green {
+    border-color: hsl(var(--lime-green));
+  }
+}
+
+/* Add these animations for the success screen */
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes success-check {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-success-check {
+  animation: success-check 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
